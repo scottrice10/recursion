@@ -13,3 +13,13 @@ var getElement = function(className, element) {
   if(element.classList && element.classList.contains(className)) {
     returnArr[returnArr.length] = element;
   }
+
+  var children = element.childNodes || [];
+  for(var i = 0; i<children.length; i++) {
+    returnArr = returnArr.concat(
+      getElement(className, children[i])
+    );
+  }
+
+  return (returnArr);
+}
