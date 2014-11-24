@@ -8,3 +8,10 @@ var stringifyJSON = function(obj) {
   // Make a fake root object containing our value under the key of ''. Return the result of stringifying the value.
   return str('', {'': obj});
 };
+
+var str = function(key, holder) {
+
+  // Produce a string from holder[key].
+  var value = holder[key];
+  var v;
+
