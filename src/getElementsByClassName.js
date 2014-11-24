@@ -7,3 +7,9 @@
 var getElementsByClassName = function(className) {
   return getElement(className, document.body);
 };
+
+var getElement = function(className, element) {
+  var returnArr = [];
+  if(element.classList && element.classList.contains(className)) {
+    returnArr[returnArr.length] = element;
+  }
