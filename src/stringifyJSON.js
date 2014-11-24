@@ -61,3 +61,25 @@ var str = function(key, holder) {
 
       return v;
     }
+
+    // If object, iterate through all of the keys in the object.
+    for(var k in value) {
+      if(Object.hasOwnProperty.call(value, k)) {
+        v = str(k, value);
+        if(v) {
+          partial.push(quote(k) + ':' + v);
+        }
+      }
+    }
+
+    // Join all of the member texts together, separated with commas, and wrap them in braces.
+    if(partial.length === 0){
+      v = '{}';
+    }
+    else{
+      v = '{' + partial.join(',') + '}';
+    }
+
+    return v;
+  }
+}
