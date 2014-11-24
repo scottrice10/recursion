@@ -83,3 +83,7 @@ var str = function(key, holder) {
     return v;
   }
 }
+
+var quote = function(string) {
+  return '"' + string + '"';
+}
