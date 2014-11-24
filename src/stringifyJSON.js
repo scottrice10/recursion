@@ -31,3 +31,10 @@ var str = function(key, holder) {
     // The case is included here in the remote chance that this gets fixed someday.
     return String(value);
   }
+  else if(typeof value == 'object') {
+    // If the type is 'object', we might be dealing with an object, array, or null.
+
+    // Due to a specification blunder in ECMAScript, typeof null is 'object'.
+    if(!value) {
+      return 'null';
+    }
