@@ -18,20 +18,16 @@ var str = function(key, holder) {
   // What happens next depends on the value's type.
   if(typeof value == 'string') {
     return quote(value);
-  }
-  else if(typeof value == 'number') {
+  } else if(typeof value == 'number') {
     // JSON numbers must be finite. Encode non-finite numbers as null.
     return isFinite(value) ? String(value) : 'null';
-  }
-  else if(typeof value == 'boolean') {
+  } else if(typeof value == 'boolean') {
     return String(value);
-  }
-  else if(typeof value == 'null') {
+  } else if(typeof value == 'null') {
     // If the value is a boolean or null, convert it to a string. Note: typeof null does not produce 'null'.
     // The case is included here in the remote chance that this gets fixed someday.
     return String(value);
-  }
-  else if(typeof value == 'object') {
+  } else if(typeof value == 'object') {
     // If the type is 'object', we might be dealing with an object, array, or null.
 
     // Due to a specification blunder in ECMAScript, typeof null is 'object'.
@@ -50,12 +46,9 @@ var str = function(key, holder) {
       }
 
       // Join all of the elements together, separated with commas, and wrap them in brackets.
-      if(partial.length === 0)
-      {
+      if(partial.length === 0) {
         v = '[]';
-      }
-      else
-      {
+      } else {
         v = '[' + partial.join(',') + ']';
       }
 
@@ -73,10 +66,9 @@ var str = function(key, holder) {
     }
 
     // Join all of the member texts together, separated with commas, and wrap them in braces.
-    if(partial.length === 0){
+    if(partial.length === 0) {
       v = '{}';
-    }
-    else{
+    } else {
       v = '{' + partial.join(',') + '}';
     }
 
