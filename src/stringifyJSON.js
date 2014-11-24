@@ -15,3 +15,19 @@ var str = function(key, holder) {
   var value = holder[key];
   var v;
 
+  // What happens next depends on the value's type.
+  if(typeof value == 'string') {
+    return quote(value);
+  }
+  else if(typeof value == 'number') {
+    // JSON numbers must be finite. Encode non-finite numbers as null.
+    return isFinite(value) ? String(value) : 'null';
+  }
+  else if(typeof value == 'boolean') {
+    return String(value);
+  }
+  else if(typeof value == 'null') {
+    // If the value is a boolean or null, convert it to a string. Note: typeof null does not produce 'null'.
+    // The case is included here in the remote chance that this gets fixed someday.
+    return String(value);
+  }
