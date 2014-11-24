@@ -38,3 +38,26 @@ var str = function(key, holder) {
     if(!value) {
       return 'null';
     }
+
+    // If array, make an array to hold the partial results of stringifying this object value.
+    var partial = [];
+    if(Object.prototype.toString.apply(value) === '[object Array]') {
+
+      // The value is an array. Stringify every element. Use null as a placeholder for non-JSON values.
+      var length = value.length;
+      for(var i = 0; i<length; i += 1) {
+        partial[i] = str(i, value) || 'null';
+      }
+
+      // Join all of the elements together, separated with commas, and wrap them in brackets.
+      if(partial.length === 0)
+      {
+        v = '[]';
+      }
+      else
+      {
+        v = '[' + partial.join(',') + ']';
+      }
+
+      return v;
+    }
