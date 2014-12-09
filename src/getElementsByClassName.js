@@ -2,24 +2,31 @@
 // var getElementsByClassName = function (className) {
 //   return document.getElementsByClassName(className);
 // };
+//
 
-// But instead we're going to implement it from scratch:
-var getElementsByClassName = function(className) {
-  return getElement(className, document.body);
-};
+var getElementsByClassName = function (className, node) {
+   var nodes = nodes || [];
+   node = node || document.body;
 
-var getElement = function(className, element) {
-  var returnArr = [];
-  if(element.classList && element.classList.contains(className)) {
-    returnArr[returnArr.length] = element;
-  }
+   //if document.body has className, then add it to nodes array
+   // if(document.body.className === className){
+   //    nodes.push
+   // }
+   //iterate through nodes
+   for(var i=0;i<node.children.length;i++){
+    if(node.children[i].className === className){
+     nodes.push(node.children[i]);
+    }
+    if(node.hasChildNodes()){
+       var newNode = node.children[i];
+       getElementsByClassName(className, newNode);
 
-  var children = element.childNodes || [];
-  for(var i = 0; i<children.length; i++) {
-    returnArr = returnArr.concat(
-      getElement(className, children[i])
-    );
-  }
 
-  return (returnArr);
-}
+    }
+
+   }
+
+
+
+   return nodes;
+ };
